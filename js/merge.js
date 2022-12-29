@@ -1,4 +1,4 @@
-export function merge(left, right) {
+function merge(left, right) {
     let arr = []
     // Break out of loop if any one of the array gets empty
     while (left.length && right.length) {
@@ -15,7 +15,7 @@ export function merge(left, right) {
     return [ ...arr, ...left, ...right ]
 }
 
-export function mergeSort(array) {
+function mergeSort(array) {
     const half = array.length / 2
     
     // Base case or terminating case

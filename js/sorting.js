@@ -1,21 +1,28 @@
-import { bubbleSort } from "./bubble.js";
-import { insertionSort } from "./insertion.js";
-import { selectionSort } from "./selectionsort.js";
-import { quickSort } from "./quick.js";
-// import { partition } from "./quick.js";
-// import { swap } from "./quick.js";
-// import {merge} from "./merge.js";
-import {mergeSort} from "./merge.js";
-
 //randomizes the heights of the arrays
 let randomize_array = document.getElementById("randomize-array-button");
 let sort_button = document.getElementById("sort-button");
 let bars_container = document.getElementById("bars-container");
 const select_algo = document.getElementById("menu");
 const output = document.getElementById('output');
+var slider = document.getElementById("array_size");
 let numOfBars = 20;
-let heightFactor = 6.5;
+var active = false;
+let min = 1;
+let max = 25;
+let heightFactor = 20;
 let unsorted_array = new Array(numOfBars);
+
+function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+slider.addEventListener("input", function() {
+    numOfBars = slider.value;
+    // max = 25;
+    bars_container.innerHTML = "";
+    unsorted_array = createRandomArray();
+    renderBars(unsorted_array);
+})
 
 select_algo.addEventListener("change", function() {
     //get selected value
@@ -30,8 +37,8 @@ function randomNumber(min, max) {
 
 function createRandomArray() {
     let array = new Array(numOfBars);
-    for(let i = 0; i < array.length; i++){
-        array[i] = randomNumber(1, 20);
+    for(let i = 0; i < numOfBars; i++){
+        array[i] = randomNumber(1, max);
     }
     return array;
 }
@@ -42,37 +49,58 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function renderBars(array) {
-    for (let i = 0; i < array.length; i++) {
+    bars_container.innerHTML = "";
+    for (let i = array.length - 1; i >= 0; i--) {
         let bar = document.createElement("div");
         bar.classList.add("bar");
         bar.style.height = array[i] * heightFactor + "px";
+        bar.style.width = ( 90 / Math.sqrt(numOfBars)) + "px";
         bars_container.appendChild(bar);
     }
 }
 
-randomize_array.addEventListener("click", function() {
+randomize_array.addEventListener("click", function() { //figure out a way to end sorts are clicked.
+    if (active == true) {
+        document.querySelector('#button').disabled = true;
+    }
     unsorted_array = createRandomArray();
     bars_container.innerHTML = "";
     renderBars(unsorted_array);
 })
 
 sort_button.addEventListener("click", function() {
-    switch(output) {
-        case "isort":
-            insertionSort(unsorted_array);
-            console.log("hello");
-            break;
-        case "ssort":
-            selectionSort(unsorted_array);
-            break;
-        case "msort":
-            mergeSort(unsorted_array);
-            break;
-        case "qsort":
-            quickSort(unsorted_array);
-            break;
-        default:
-            bubbleSort(unsorted_array);
-            break;
+    var test = document.getElementById("menu");
+    console.log(test);
+    var value = test.value;
+    if (active == false) {
+        switch(value) {
+            case "isort":
+                (insertionSort(unsorted_array)); //works, animate
+                break;
+            case "ssort":
+                renderBars((bubbleSort(unsorted_array))); //broken, some sort of issue regarding bubble ???
+                break;
+            case "msort":
+                renderBars(mergeSort(unsorted_array)); //broken
+                break;
+            case "qsort":
+                renderBars(quickSort(unsorted_array, 0, numOfBars - 1)); //works, animate
+                break;
+            case "bsort":
+                active = true;
+                slider.disabled = true;
+                document.getElementById('bars-container').style.transform = 'scaleY(-1)';
+                bubbleSort(unsorted_array).then(response => {
+                    active = false;
+                    slider.disabled = false;
+                }); //works save for a few problems
+                break;
+            case "none":
+                console.log("no sort selected");
+                break;
+            case "output":
+                console.log("no sort selected");
+                break;       
+        }
     }
 })

@@ -1,11 +1,10 @@
-
-export function swap(items, leftIndex, rightIndex) {
+function swap(items, leftIndex, rightIndex) {
     let temp = items[leftIndex];
     items[leftIndex] = items[rightIndex];
     items[rightIndex] = temp;
 }
 
-export function partition( items, left, right) {
+function partition( items, left, right) {
 
     let pivot = items[Math.floor((right + left)/ 2)],
         i = left,
@@ -30,7 +29,7 @@ export function partition( items, left, right) {
     return i;
 }
 
-export function quickSort(items, left, right) {
+function quickSort(items, left, right) {
     let index;
 
     if (items.length > 1) {
@@ -47,5 +46,3 @@ export function quickSort(items, left, right) {
 
     return items;
 }
-
-

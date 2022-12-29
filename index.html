@@ -10,7 +10,12 @@
         </header>
         <main>
             <div class="container">
+                <script src="./js/slider.js"></script>
                 <div class="buttons-container">
+                    <div class="slider-container" id="slider_container">
+                        <input type="range" min="5" max="150" class="slider" value="75" step = "5" id="array_size">
+                        <output id="sizeOfArray"></output>
+                    </div>
                     <button id = "sort-button">Sort!</button>
                     <button id = "randomize-array-button">Randomize Array</button>
                     <!-- <div class="sorting-dropdown">
@@ -26,6 +31,7 @@
                     <script src="./js/dropdown.js"></script> -->
                     <!-- Dropdrown attempt 2-->
                     <select name="" id="menu">
+                        <option value = "none">Choose a Sort!</option>
                         <option value ="bsort">Bubble Sort</option>
                         <option value ="ssort">Selection Sort</option>
                         <option value ="isort">Insertion Sort</option>
@@ -39,14 +45,12 @@
                     <div class="bar"></div>
                 </div>
             </div>
+            <script src ="./js/bubble.js"></script>
             <script src="./js/sorting.js"></script>
-            <!--script src="sorting.js"></script-->
-            
-            <!--script src="insertion.js"></script-->
-            <!--script src="selection.js"></script-->
-            <!--script src="bubble.js"></script-->
-            <!--script src="merge.js"></script-->
-            <!--script src="quick.js"></script-->
+            <script src="./js/insertion.js"></script>
+            <script src="./js/selection.js"></script>
+            <script src="./js/merge.js"></script>
+            <script src="./js/quick.js"></script>
             <!-- sorting visualizer-->
             <!-- Within the main element, add the HTML elements that you will use to display the sorting visualizer. This might include div elements to contain the data and the sorting algorithms, form elements to allow the user to input data, and button elements to allow the user to initiate the sorting process.-->
         </main>
