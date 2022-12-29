@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function renderBars(array) {
     bars_container.innerHTML = "";
-    for (let i = array.length - 1; i >= 0; i--) {
+    for (let i = 0; i < array.length; i++) {
         let bar = document.createElement("div");
         bar.classList.add("bar");
         bar.style.height = array[i] * heightFactor + "px";
@@ -64,6 +64,7 @@ randomize_array.addEventListener("click", function() { //figure out a way to end
         document.querySelector('#button').disabled = true;
     }
     unsorted_array = createRandomArray();
+    console.log(unsorted_array);
     bars_container.innerHTML = "";
     renderBars(unsorted_array);
 })
@@ -78,7 +79,7 @@ sort_button.addEventListener("click", function() {
                 (insertionSort(unsorted_array)); //works, animate
                 break;
             case "ssort":
-                renderBars((bubbleSort(unsorted_array))); //broken, some sort of issue regarding bubble ???
+                renderBars((selectionSort(unsorted_array))); //broken, some sort of issue regarding bubble ???
                 break;
             case "msort":
                 renderBars(mergeSort(unsorted_array)); //broken
@@ -89,7 +90,7 @@ sort_button.addEventListener("click", function() {
             case "bsort":
                 active = true;
                 slider.disabled = true;
-                document.getElementById('bars-container').style.transform = 'scaleY(-1)';
+                //document.getElementById('bars-container').style.transform = 'scaleY(-1)';
                 bubbleSort(unsorted_array).then(response => {
                     active = false;
                     slider.disabled = false;

@@ -63,7 +63,8 @@ body{
 .bars-container {
     display: flex;
     flex-direction: row;
-    transform: rotate(180deg);
+    /* transform: rotate(180deg); */
+    transform: scaleY(-1);
 }
 
 .bar {
