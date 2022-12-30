@@ -6,7 +6,7 @@ async function bubbleSort(array){
           bars[j].style.backgroundColor = "aqua";
           bars[j + 1].style.backgroundColor = "aqua";
 
-          await sleep(500);
+          await sleep(speed);
           
           if (array[j] > array[j + 1]) {
             let temp = array[j];
@@ -17,12 +17,12 @@ async function bubbleSort(array){
             bars[j].style.height = array[j] * heightFactor + "px";
             bars[j + 1].style.height = array[j + 1] * heightFactor + "px";
           }
-          await sleep(500);
+          await sleep(speed);
           bars[j].style.backgroundColor = "firebrick";
           bars[j+1].style.backgroundColor = "firebrick";
         }
         bars[bars.length - 1 - i].style.backgroundColor = "lightgreen";
-        await sleep(500);
+        await sleep(speed);
     }
     return Promise;
 }
