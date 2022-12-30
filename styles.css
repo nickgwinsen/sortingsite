@@ -51,7 +51,8 @@ body{
 .bars-container {
     display: flex;
     flex-direction: row;
-    transform: rotate(180deg);
+    /* transform: rotate(180deg); */
+    transform: scaleY(-1);
 }
 
 .bar {
@@ -59,7 +60,7 @@ body{
     background-color: firebrick;
     border: 1px solid black;
     border-radius: 2px;
-    transition: 0.2s all ease;
+    /* transition: 0.2s all ease; */
 }
 
 .output {

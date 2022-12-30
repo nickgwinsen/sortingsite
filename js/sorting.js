@@ -5,7 +5,7 @@ let bars_container = document.getElementById("bars-container");
 const select_algo = document.getElementById("menu");
 const output = document.getElementById('output');
 var slider = document.getElementById("array_size");
-let numOfBars = 50;
+let numOfBars = 20;
 var active = false;
 let min = 1;
 let max = 25;
@@ -74,18 +74,12 @@ sort_button.addEventListener("click", function() {
     console.log(test);
     var value = test.value;
     if (active == false) {
-        //unlikely issue: if the array GETS sorted but is not displayed as so, the animation will break.
         switch(value) {
             case "isort":
-                renderBars(insertionSort(unsorted_array)); //working, animate
+                (insertionSort(unsorted_array)); //works, animate
                 break;
             case "ssort":
-                active = true;
-                slider.disabled = true;
-                selectionSort(unsorted_array).then(response => {
-                    active = false;
-                    slider.disabled = false;
-                }) //working, animate
+                renderBars((bubbleSort(unsorted_array))); //broken, some sort of issue regarding bubble ???
                 break;
             case "msort":
                 renderBars(mergeSort(unsorted_array)); //works, animate
@@ -96,11 +90,11 @@ sort_button.addEventListener("click", function() {
             case "bsort":
                 active = true;
                 slider.disabled = true;
-                //document.getElementById('bars-container').style.transform = 'scaleY(-1)';
-                bubbleSort(unsorted_array).then(response => { //breaks when you perform other sorts, namely insertion
+                document.getElementById('bars-container').style.transform = 'scaleY(-1)';
+                bubbleSort(unsorted_array).then(response => {
                     active = false;
                     slider.disabled = false;
-                }); //finished
+                }); //works save for a few problems
                 break;
             case "none":
                 console.log("no sort selected");
