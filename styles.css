@@ -20,18 +20,6 @@ body{
     padding: 20px 0px;
 }
 
-.dropbtn{
-    background-color:lightskyblue;
-    color:whitesmoke;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-}
-/*hover and focus*/
-.dropbtn:hover, .dropbutton:focus{
-    background-color: darkblue;
-}
 
 .sorting-dropdown{
     position:relative;

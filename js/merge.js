@@ -1,3 +1,4 @@
+let bars = document.getElementsByClassName("bar");
 function merge(left, right) {
     let arr = []
     // Break out of loop if any one of the array gets empty

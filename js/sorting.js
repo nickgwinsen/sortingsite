@@ -5,7 +5,7 @@ let bars_container = document.getElementById("bars-container");
 const select_algo = document.getElementById("menu");
 const output = document.getElementById('output');
 var slider = document.getElementById("array_size");
-let numOfBars = 20;
+let numOfBars = 50;
 var active = false;
 let min = 1;
 let max = 25;
@@ -48,9 +48,9 @@ document.addEventListener("DOMContentLoaded", function () {
     renderBars(unsorted_array);
 });
 
-function renderBars(array) {
+function renderBars(array) { //bars face the correct direction if bubble sort is performed first. If a different sort is performed first, they are backwards.
     bars_container.innerHTML = "";
-    for (let i = array.length - 1; i >= 0; i--) {
+    for (let i = 0; i < array.length; i++) {
         let bar = document.createElement("div");
         bar.classList.add("bar");
         bar.style.height = array[i] * heightFactor + "px";
@@ -64,6 +64,7 @@ randomize_array.addEventListener("click", function() { //figure out a way to end
         document.querySelector('#button').disabled = true;
     }
     unsorted_array = createRandomArray();
+    console.log(unsorted_array);
     bars_container.innerHTML = "";
     renderBars(unsorted_array);
 })
@@ -73,15 +74,21 @@ sort_button.addEventListener("click", function() {
     console.log(test);
     var value = test.value;
     if (active == false) {
+        //unlikely issue: if the array GETS sorted but is not displayed as so, the animation will break.
         switch(value) {
             case "isort":
-                (insertionSort(unsorted_array)); //works, animate
+                renderBars(insertionSort(unsorted_array)); //working, animate
                 break;
             case "ssort":
-                renderBars((bubbleSort(unsorted_array))); //broken, some sort of issue regarding bubble ???
+                active = true;
+                slider.disabled = true;
+                selectionSort(unsorted_array).then(response => {
+                    active = false;
+                    slider.disabled = false;
+                }) //working, animate
                 break;
             case "msort":
-                renderBars(mergeSort(unsorted_array)); //broken
+                renderBars(mergeSort(unsorted_array)); //works, animate
                 break;
             case "qsort":
                 renderBars(quickSort(unsorted_array, 0, numOfBars - 1)); //works, animate
@@ -89,11 +96,11 @@ sort_button.addEventListener("click", function() {
             case "bsort":
                 active = true;
                 slider.disabled = true;
-                document.getElementById('bars-container').style.transform = 'scaleY(-1)';
-                bubbleSort(unsorted_array).then(response => {
+                //document.getElementById('bars-container').style.transform = 'scaleY(-1)';
+                bubbleSort(unsorted_array).then(response => { //breaks when you perform other sorts, namely insertion
                     active = false;
                     slider.disabled = false;
-                }); //works save for a few problems
+                }); //finished
                 break;
             case "none":
                 console.log("no sort selected");
