@@ -85,7 +85,12 @@ sort_button.addEventListener("click", function() {
                 });
                 break;
             case "ssort":
-                renderBars((bubbleSort(unsorted_array))); //broken, some sort of issue regarding bubble ???
+                active = true;
+                slider.disabled = true;
+                selectionSort(unsorted_array).then(response => {
+                    active = false;
+                    slider.disabled = false;
+                });
                 break;
             case "msort":
                 renderBars(mergeSort(unsorted_array)); //broken
