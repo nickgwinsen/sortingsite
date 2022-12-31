@@ -71,7 +71,7 @@ body{
     background-color: firebrick;
     border: 1px solid black;
     border-radius: 2px;
-    transition: 0.2s all ease;
+    transition: 0.3s all ease;
 }
 
 .output {

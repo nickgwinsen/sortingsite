@@ -5,7 +5,8 @@ let bars_container = document.getElementById("bars-container");
 const select_algo = document.getElementById("menu");
 const output = document.getElementById('output');
 var slider = document.getElementById("array_size");
-let numOfBars = 20;
+let numOfBars = 75;
+let speed = (500);
 var active = false;
 let min = 1;
 let max = 25;
@@ -50,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function renderBars(array) {
     bars_container.innerHTML = "";
-    for (let i = array.length - 1; i >= 0; i--) {
+    for (let i = 0; i < array.length; i++) {
         let bar = document.createElement("div");
         bar.classList.add("bar");
         bar.style.height = array[i] * heightFactor + "px";
@@ -64,6 +65,7 @@ randomize_array.addEventListener("click", function() { //figure out a way to end
         document.querySelector('#button').disabled = true;
     }
     unsorted_array = createRandomArray();
+    console.log(unsorted_array);
     bars_container.innerHTML = "";
     renderBars(unsorted_array);
 })
@@ -73,12 +75,22 @@ sort_button.addEventListener("click", function() {
     console.log(test);
     var value = test.value;
     if (active == false) {
+        active = true;
+        slider.disabled = true;
         switch(value) {
             case "isort":
-                (insertionSort(unsorted_array)); //works, animate
+                insertionSort(unsorted_array).then(response => {
+                    active = false;
+                    slider.disabled = false;
+                });
                 break;
             case "ssort":
-                renderBars((bubbleSort(unsorted_array))); //broken, some sort of issue regarding bubble ???
+                active = true;
+                slider.disabled = true;
+                selectionSort(unsorted_array).then(response => {
+                    active = false;
+                    slider.disabled = false;
+                });
                 break;
             case "msort":
                 renderBars(mergeSort(unsorted_array)); //broken
@@ -89,11 +101,10 @@ sort_button.addEventListener("click", function() {
             case "bsort":
                 active = true;
                 slider.disabled = true;
-                document.getElementById('bars-container').style.transform = 'scaleY(-1)';
                 bubbleSort(unsorted_array).then(response => {
                     active = false;
                     slider.disabled = false;
-                }); //works save for a few problems
+                });
                 break;
             case "none":
                 console.log("no sort selected");
