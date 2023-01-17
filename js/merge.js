@@ -1,28 +1,63 @@
-function merge(left, right) {
-    let arr = []
-    // Break out of loop if any one of the array gets empty
-    while (left.length && right.length) {
-        // Pick the smaller among the smallest element of left and right sub arrays 
-        if (left[0] < right[0]) {
-            arr.push(left.shift()); 
-        } else {
-            arr.push(right.shift());
-        }
+async function merge(array, left, mid, right) {
+    //this allows us to manipulate the bars on the website
+    let bars = document.getElementsByClassName("bar");
+    //creates additional arrays to store subarrays
+    let size1 = mid - left + 1;
+    let size2 = right - mid;
+    let leftArray = new Array(size1);
+    let rightArray = new Array(size2);
+    await sleep(speed);
+
+    //colors all selected bars and copies elements of array into leftArray
+    for (let i = 0; i < size1; i++) {
+        bars[i + left].style.background = "powderblue";
+        leftArray[i] = array[i + left];
     }
-    
-    // Concatenating the leftover elements
-    // (in case we didn't go through the entire left or right array)
-    return [ ...arr, ...left, ...right ]
+    //colors all selected bars and copies elements of array into rightArray
+    for (let i = 0; i < size2; i++) {
+        bars[i + mid + 1].style.backgroundColor = "powderblue";
+        rightArray[i] = array[i + mid + 1];
+    }
+
+    await sleep(speed);
+
+    //copies elements from two additional arrays depending on which is smaller
+    let i = 0, j = 0, k = left;
+    while (i < size1 && j < size2) {
+        await sleep(speed);
+        if (parseInt(leftArray[i]) < parseInt(rightArray[j])) {
+            //sets height of bars to correct height
+            bars[k].style.height = leftArray[i] * heightFactor + "px";
+            array[k] = leftArray[i++];
+        } else {
+            bars[k].style.height = rightArray[j] * heightFactor + "px";
+            array[k] = rightArray[j++];
+        }
+        //colors bars tan if they have already been dealt with
+        bars[k].style.backgroundColor = "tan";
+        k++;
+    }
+    //copies rest of leftArray into array
+    while (i < size1) {
+        bars[k].style.height = leftArray[i] * heightFactor + "px";
+        bars[k].style.background = "tan";
+        array[k] = leftArray[i++];
+        k++
+    }
+    //copies rest of rightArray into array
+    while (j < size2) {
+        bars[k].style.height = rightArray[j] * heightFactor + "px";
+        bars[k].style.background = "tan";
+        array[k] = rightArray[j++];
+        k++
+    }
 }
 
-function mergeSort(array) {
-    const half = array.length / 2
-    
-    // Base case or terminating case
-    if(array.length < 2){
-      return array 
+async function mergeSort(array, left, right) {
+    if (left < right) {
+        const mid = left + Math.floor((right-left)/2);
+        await mergeSort(array, left, mid);
+        await mergeSort(array, mid + 1, right);
+        await merge(array, left, mid, right);
     }
-    
-    const left = array.splice(0, half);
-    return merge(mergeSort(left),mergeSort(array));
-  }
+}

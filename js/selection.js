@@ -1,34 +1,35 @@
 async function selectionSort(arr) {
+    //this allows us to manipulate the bars on the website
     let bars = document.getElementsByClassName("bar");
     for (var i = 0; i < arr.length; i++) {
+        //setting minimums
         let min = i;
         let prevMin = 0;
         await sleep(speed);
-        bars[min].style.backgroundColor = "aqua";
+        //sets color of bar being compared
+        bars[min].style.backgroundColor = "powderblue";
         await sleep(220);
+        //searches through array to find absolute minimum
         for (var j = i + 1; j < arr.length; j++) {
             if (arr[min] > arr[j]) {
                 prevMin = min;
                 min = j;
             }
         }
+        //swaps bars and array elements if bar being compared is not also the absolute minimum
         if (i != min) {
-            bars[min].style.backgroundColor = "aqua";
-            await sleep(400);
+            bars[min].style.backgroundColor = "powderblue";
+            await sleep(speed);
             [arr[ i ],arr[min]]= [arr[min],arr[ i ]];
             bars[min].style.height = arr[min] * heightFactor + "px";
             bars[i].style.height = arr[i] * heightFactor + "px";
-            await sleep(400);
-            bars[i].style.backgroundColor = "lightgreen";
+            await sleep(speed);
+            bars[i].style.backgroundColor = "darkseagreen";
             bars[min].style.backgroundColor = "firebrick";
             await sleep(speed);
         }
-        bars[i].style.backgroundColor = "lightgreen";
+        //sets color if there is no swap to show correct placement
+        bars[i].style.backgroundColor = "darkseagreen";
     }
-    for(let i = 0; i < arr.length; i++){
-        bars[i].style.backgroundColor = "lightgreen";
-        await sleep(100);
-    }
-    return Promise;
 }
 
