@@ -1,48 +1,40 @@
-function swap(items, leftIndex, rightIndex) {
-    let temp = items[leftIndex];
-    items[leftIndex] = items[rightIndex];
-    items[rightIndex] = temp;
+async function quickSort(array, left, right){
+    let bars = document.getElementsByClassName("bar");
+    // console.log(array);
+    if(left>right)
+        return ;
+    let pi = await partition(array, left, right);
+    bars[pi].style.backgroundColor='darkseagreen';
+    await quickSort(array, left, pi-1); 
+    await quickSort(array, pi+1, right);
 }
 
-function partition( items, left, right) {
+async function partition(array, left, right){
+    let bars = document.getElementsByClassName("bar");
+    let i=left;
+    bars[i].style.backgroundColor='purple';
 
-    let pivot = items[Math.floor((right + left)/ 2)],
-        i = left,
-        j = right;
-
-    while (i <= j) {
-        while (items[i] < pivot) {
+    // await sleep(speed / numOfBars);
+    for(let j=left; j<right; j++){
+        bars[j].style.backgroundColor='orange';
+        await sleep(speed / numOfBars);
+        if(array[j]<array[right]){
+            [array[j], array[i]] = [array[i], array[j]];
+            swap(bars[j], bars[i]);
+            bars[i].style.backgroundColor='firebrick';
             i++;
         }
-
-        while (items[j] > pivot) {
-            j--;
-        }
-
-        if (i <= j) {
-            swap(items, i, j);
-            i++;
-            j--;
-        }
+        bars[j].style.backgroundColor='firebrick';
+        bars[i].style.backgroundColor='purple';
     }
-
+    // await sleep(speed / numOfBars);
+    [array[i], array[right]] = [array[right], array[i]];
+    swap(bars[i], bars[right]);
     return i;
 }
 
-function quickSort(items, left, right) {
-    let index;
-
-    if (items.length > 1) {
-        index = partition(items, left, right);
-
-        if (left < index - 1) {
-            quickSort(items, left, index - 1);
-        }
-
-        if (index < right) {
-            quickSort(items, index, right);
-        }
-    }
-
-    return items;
+function swap(element1, element2){
+    let temp = element1.style.height;
+    element1.style.height=element2.style.height;
+    element2.style.height=temp;
 }

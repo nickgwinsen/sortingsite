@@ -6,7 +6,7 @@ async function merge(array, left, mid, right) {
     let size2 = right - mid;
     let leftArray = new Array(size1);
     let rightArray = new Array(size2);
-    await sleep(speed);
+    await sleep(speed / numOfBars);
 
     //colors all selected bars and copies elements of array into leftArray
     for (let i = 0; i < size1; i++) {
@@ -19,12 +19,12 @@ async function merge(array, left, mid, right) {
         rightArray[i] = array[i + mid + 1];
     }
 
-    await sleep(speed);
+    await sleep(speed / numOfBars);
 
     //copies elements from two additional arrays depending on which is smaller
     let i = 0, j = 0, k = left;
     while (i < size1 && j < size2) {
-        await sleep(speed);
+        await sleep(speed / numOfBars);
         if (parseInt(leftArray[i]) < parseInt(rightArray[j])) {
             //sets height of bars to correct height
             bars[k].style.height = leftArray[i] * heightFactor + "px";

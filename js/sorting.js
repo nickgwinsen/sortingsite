@@ -6,7 +6,7 @@ const select_algo = document.getElementById("menu");
 const output = document.getElementById('output');
 var slider = document.getElementById("array_size");
 let numOfBars = 75;
-let speed = (400);
+let speed = (5000);
 var active = false;
 let min = 1;
 let max = 25;
@@ -104,13 +104,13 @@ sort_button.addEventListener("click", async function() {
                 await mergeSort(unsorted_array, 0, unsorted_array.length - 1);
                 for (let i = 0; i < unsorted_array.length; i++) {
                     bars[i].style.backgroundColor = "darkseagreen";
-                    await sleep(100);
+                    await sleep(30);
                 }
                 active = false;
                 slider.disabled = false;
                 break;
             case "qsort":
-                renderBars(quickSort(unsorted_array, 0, numOfBars - 1)); //works, animate
+                await quickSort(unsorted_array, 0, numOfBars - 1); //works, animate
                 active = false;
                 slider.disabled = false;
                 break;
@@ -121,9 +121,13 @@ sort_button.addEventListener("click", async function() {
                 break;
             case "none":
                 console.log("no sort selected");
+                active = false;
+                slider.disabled = false;
                 break;
             case "output":
                 console.log("no sort selected");
+                active = false;
+                slider.disabled = false;
                 break;       
         }
     }
