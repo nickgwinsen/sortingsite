@@ -14,8 +14,8 @@ async function bubbleSort(array){
             let temp = array[j];
             array[j] = array[j + 1];
             array[j + 1] = temp;
-            bars[j].style.height = array[j] * heightFactor + "px";
-            bars[j + 1].style.height = array[j + 1] * heightFactor + "px";
+            bars[j].style.height = array[j] * heightFactor + "vw";
+            bars[j + 1].style.height = array[j + 1] * heightFactor + "vw";
           }
           await sleep(speed / numOfBars);
           //changes colors back to original

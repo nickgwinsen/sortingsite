@@ -27,10 +27,10 @@ async function merge(array, left, mid, right) {
         await sleep(speed / numOfBars);
         if (parseInt(leftArray[i]) < parseInt(rightArray[j])) {
             //sets height of bars to correct height
-            bars[k].style.height = leftArray[i] * heightFactor + "px";
+            bars[k].style.height = leftArray[i] * heightFactor + "vw";
             array[k] = leftArray[i++];
         } else {
-            bars[k].style.height = rightArray[j] * heightFactor + "px";
+            bars[k].style.height = rightArray[j] * heightFactor + "vw";
             array[k] = rightArray[j++];
         }
         //colors bars tan if they have already been dealt with
@@ -39,14 +39,14 @@ async function merge(array, left, mid, right) {
     }
     //copies rest of leftArray into array
     while (i < size1) {
-        bars[k].style.height = leftArray[i] * heightFactor + "px";
+        bars[k].style.height = leftArray[i] * heightFactor + "vw";
         bars[k].style.background = "tan";
         array[k] = leftArray[i++];
         k++
     }
     //copies rest of rightArray into array
     while (j < size2) {
-        bars[k].style.height = rightArray[j] * heightFactor + "px";
+        bars[k].style.height = rightArray[j] * heightFactor + "vw";
         bars[k].style.background = "tan";
         array[k] = rightArray[j++];
         k++

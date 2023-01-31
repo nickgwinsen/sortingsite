@@ -5,32 +5,16 @@
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
-        <header>
-            <!-- logo and nav elements-->
-        </header>
+        <header></header>
         <main>
             <div class="container">
-                <script src="./js/slider.js"></script>
+                <div class="slider-container" id="slider_container">
+                    <input type="range" min="5" max="150" class="slider" value="75" step = "5" id="array_size">
+                </div>
                 <div class="buttons-container">
-                    <div class="slider-container" id="slider_container">
-                        <input type="range" min="5" max="150" class="slider" value="75" step = "5" id="array_size">
-                        <output id="sizeOfArray"></output>
-                    </div>
-                    <button id = "sort-button">Sort!</button>
-                    <button id = "randomize-array-button">Randomize Array</button>
-                    <!-- <div class="sorting-dropdown">
-                        <button onclick="myFunction()" class="dropbtn">Sorts</button>
-                        <div id="myDropdown" class ="dropdown-content">
-                            <a href="#">Bubble Sort</a>
-                            <a href="#">Insertion Sort</a>
-                            <a href="#">Selection Sort</a>
-                            <a href="#">Quick Sort</a>
-                            <a href="#">Merge Sort</a>
-                        </div>
-                    </div>
-                    <script src="./js/dropdown.js"></script> -->
-                    <!-- Dropdrown attempt 2-->
-                    <select name="" id="menu">
+                    <button id = "sort-button" class = "sort-button">Sort!</button>
+                    <button id = "randomize-array-button" class = "randomize-array-button">Randomize Array</button>
+                    <select name="" id="menu" class = "menu">
                         <option value = "none">Choose a Sort!</option>
                         <option value ="bsort">Bubble Sort</option>
                         <option value ="ssort">Selection Sort</option>
@@ -38,12 +22,8 @@
                         <option value ="msort">Merge Sort</option>
                         <option value ="qsort">Quick Sort</option>
                     </select>
-                    <div class="output" id="output">Output</div>
-                    <script src="./js/dropdown2.js"></script>
                 </div>
-                <div class="bars-container" id="bars-container">
-                    <div class="bar"></div>
-                </div>
+                <div class="bars-container" id="bars-container"></div>
             </div>
             <script src ="./js/bubble.js"></script>
             <script src="./js/sorting.js"></script>
@@ -52,7 +32,6 @@
             <script src="./js/merge.js"></script>
             <script src="./js/quick.js"></script>
             <!-- sorting visualizer-->
-            <!-- Within the main element, add the HTML elements that you will use to display the sorting visualizer. This might include div elements to contain the data and the sorting algorithms, form elements to allow the user to input data, and button elements to allow the user to initiate the sorting process.-->
         </main>
         <footer>
             <!-- site information-->

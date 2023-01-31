@@ -21,8 +21,8 @@ async function selectionSort(arr) {
             bars[min].style.backgroundColor = "powderblue";
             await sleep(speed / numOfBars);
             [arr[ i ],arr[min]]= [arr[min],arr[ i ]];
-            bars[min].style.height = arr[min] * heightFactor + "px";
-            bars[i].style.height = arr[i] * heightFactor + "px";
+            bars[min].style.height = arr[min] * heightFactor + "vw";
+            bars[i].style.height = arr[i] * heightFactor + "vw";
             await sleep(speed / numOfBars);
             bars[i].style.backgroundColor = "darkseagreen";
             bars[min].style.backgroundColor = "firebrick";

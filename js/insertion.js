@@ -14,8 +14,8 @@ async function insertionSort(inputArr) {
                 let temp = inputArr[j];
                 inputArr[j] = inputArr[j+1];
                 inputArr[j+1] = temp;
-                bars[j].style.height = inputArr[j] * heightFactor + "px";
-                bars[j + 1].style.height = inputArr[j + 1] * heightFactor + "px";
+                bars[j].style.height = inputArr[j] * heightFactor + "vw";
+                bars[j + 1].style.height = inputArr[j + 1] * heightFactor + "vw";
                 bars[j].style.backgroundColor = "powderblue";
                 bars[j + 1].style.backgroundColor = "firebrick";
                 j--;
@@ -31,6 +31,6 @@ async function insertionSort(inputArr) {
         //shows that all elements are in sorted order
         for (let i = 0; i < inputArr.length; i++) {
             bars[i].style.backgroundColor = "darkseagreen";
-            await sleep(30);
+            await sleep(speed / (5 * numOfBars));
         }
 }

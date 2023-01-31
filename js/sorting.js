@@ -8,9 +8,9 @@ var slider = document.getElementById("array_size");
 let numOfBars = 75;
 let speed = (5000);
 var active = false;
-let min = 1;
-let max = 25;
-let heightFactor = 20;
+let min = 3;
+let max = 50;
+let heightFactor = .45;
 let unsorted_array = new Array(numOfBars);
 
 //function that takes a number in milliseconds and uses that to delay animations
@@ -30,8 +30,6 @@ slider.addEventListener("input", function() {
 select_algo.addEventListener("change", function() {
     //get selected value
     const value = this.value;
-    //update output element based on selected value
-    output.innerHTML = value;
 })
 
 //creates a random number between the minimum and maximum
@@ -60,7 +58,7 @@ function renderBars(array) {
     for (let i = 0; i < array.length; i++) {
         let bar = document.createElement("div");
         bar.classList.add("bar");
-        bar.style.height = array[i] * heightFactor + "px";
+        bar.style.height = array[i] * heightFactor + "vw";
         bar.style.width = ( 90 / Math.sqrt(numOfBars)) + "px";
         bars_container.appendChild(bar);
     }
@@ -104,7 +102,7 @@ sort_button.addEventListener("click", async function() {
                 await mergeSort(unsorted_array, 0, unsorted_array.length - 1);
                 for (let i = 0; i < unsorted_array.length; i++) {
                     bars[i].style.backgroundColor = "darkseagreen";
-                    await sleep(30);
+                    await sleep(speed / (5 * numOfBars));
                 }
                 active = false;
                 slider.disabled = false;
